@@ -1,0 +1,67 @@
+#include <stdio.h>
+
+int main(){
+	int wordLength, i=0, k=0, x=0;
+	char newarray[wordLength][7], array[7][4] = {{'A', 'B', 'C', 'D'}, 
+                                                 {'E', 'F', 'G', 'H'},
+                                                 {'I', 'J', 'K', 'L'},
+                                                 {'M', 'N', 'O', 'P'},
+                                                 {'Q', 'R', 'S', 'T'},
+                                                 {'U', 'V', 'W', 'X'},
+                                                 {'Y', 'Z'}};
+	
+	for(int i=0; i<=6; i++){
+		printf("\n");
+		for(int j=0; j<=3; j++){
+			printf("%c  ", array[i][j]);	
+		}
+	}
+	
+	printf("\n\nGuess a  word, and then\ntell me how many letters is your word composed of: ");
+	scanf("%d", &wordLength);
+
+    int letterColumn[wordLength] = {}, word[wordLength] = {};
+    
+	printf("\n\nNow look at the above table, and tell me");
+	while(x<wordLength){
+		
+		printf("\nIn which column does letter %d of your word lie in: ", x+1);
+		scanf("%d", &letterColumn[x]);
+        
+        if(letterColumn[x] == 1 || letterColumn[x] == 2){
+            for(i=0; i<=6; i++){
+                newarray[x][i] = array[i][letterColumn[x]-1];
+            }
+        }
+
+        else if(letterColumn[x] == 3 || letterColumn[x] == 4){
+            for(i=0; i<=5; i++){
+                newarray[x][i] = array[i][letterColumn[x]-1];
+            }
+        }
+        x++;
+	}
+
+	for(int i=0; i<wordLength; i++){       //Prints the new array
+		for(int j=0; j<=6; j++){
+			printf("%c  ", newarray[i][j]);
+		}
+		printf("\n");
+	}
+	
+	x=0;
+	
+	while(x<wordLength){
+		printf("\nIn which column, of this new array, does letter %d of your word lie in: ", x+1);
+		scanf("%d", &letterColumn[x]);
+		
+		word[x] = newarray[x][letterColumn[x]-1];
+		x++;
+	}
+	
+	printf("\nYou are thinking about the word: ");
+	for(i=0; i<wordLength; i++){
+		printf("%c", word[i]);
+	}
+	
+}
